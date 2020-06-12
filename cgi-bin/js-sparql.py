@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from SPARQLWrapper import SPARQLWrapper, JSON
+import encode
 
 print ("Content-type:text/html\n\n")
 
@@ -49,7 +50,7 @@ for result in results["results"]["bindings"]:
     url = result['url']['value']
     label = result['label']['value']
     thumbnail = result['thumbnail']['value']
-    
+
     table += "<tr>"
     table += f"<td><a href='{url}'>{label}</a></td>"
     table += f"<td><img src='{thumbnail}'></td>"

@@ -2,6 +2,7 @@
 
 import sqlite3
 import cgi
+import encode
 
 # フォームの取得
 form = cgi.FieldStorage()
@@ -40,10 +41,10 @@ sql = "INSERT OR REPLACE INTO Items VALUES('" + form_id + "', '" + form_name + "
 cur.execute(sql)
 
 if record == None:
-    print("<p>追加に成功しました</p>")    
+    print("<p>追加に成功しました</p>")
 else:
     print("<p>更新に成功しました</p>")
-    
+
 
 # 商品情報を取得
 records = cur.execute("SELECT * FROM Items;")
@@ -63,7 +64,7 @@ for record in records:
         table += "<td>"
         table += str(column)
         table += "</td>"
-    table += "</tr>"    
+    table += "</tr>"
 table += "</table>"
 print(table)
 
@@ -73,7 +74,7 @@ print("<p><a href='#' onclick='window.close()'>閉じる</a></p>")
 con.commit()
 
 # データベースを切断
-con.close() 
+con.close()
 
 print("</body>")
 

@@ -2,6 +2,7 @@
 
 import sqlite3
 import cgi
+import encode
 
 # フォームの取得
 form = cgi.FieldStorage()
@@ -26,7 +27,7 @@ def showUserInfo(id):
 
     print("<p>氏名: " + name + "</p>")
     print("<p>電話番号: " + tel + "</p>")
-    print("<p>メールアドレス: " + mail + "</p>")    
+    print("<p>メールアドレス: " + mail + "</p>")
 
 # ユーザの購買履歴の検索・表示
 def showUserHistory(id):
@@ -41,16 +42,16 @@ def showUserHistory(id):
     table += "<th>name</th>"
     table += "<th>price</th>"
     table += "</tr>"
-    
+
     for record in records:
         table += "<tr>"
         for column in record:
             table += "<td>"
             table += str(column)
             table += "</td>"
-        table += "</tr>"    
+        table += "</tr>"
     table += "</table>"
-    print(table)        
+    print(table)
 
 # 商品情報の表示
 def showItems(user_id):
@@ -74,7 +75,7 @@ def showItems(user_id):
         name = record[1]
         price = record[2]
         stock = record[3]
-        
+
         table += "<td>"
         table += str(name)
         table += "</td>"
@@ -91,15 +92,15 @@ def showItems(user_id):
         form += "<input type='hidden' name='user' value='" + user_id + "'>"
         form += "<input type='hidden' name='item' value='" + item_id + "'>"
         form += "<input type='submit' value='購入'></form>"
-        
-        table += "<td>"        
-        table += form
-        table += "</td>"                
 
-        table += "</tr>"    
+        table += "<td>"
+        table += form
+        table += "</td>"
+
+        table += "</tr>"
     table += "</table>"
-    print(table)                
-    
+    print(table)
+
 # Idに一致するpasswordを取得
 sql = "SELECT password FROM Users WHERE id='" + form_id + "';"
 records = cur.execute(sql)
@@ -124,22 +125,22 @@ if pw == None:
 else:
     if form_pw == pw[0]:
         print("<p>ログインに成功しました</p>")
-        
+
         # ユーザ情報の検索・表示
         showUserInfo(form_id)
-        
+
         # ユーザの購買履歴の検索・表示
         showUserHistory(form_id)
 
         # 商品情報の表示
         showItems(form_id)
-        
+
     else:
         print("<p>パスワードが一致しません</p>")
-        print("<p><a href='../login.html'>戻る</a></p>")        
+        print("<p><a href='../login.html'>戻る</a></p>")
 
 # データベースを切断
-con.close() 
+con.close()
 
 print("</body>")
 

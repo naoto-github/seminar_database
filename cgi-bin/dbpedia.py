@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from SPARQLWrapper import SPARQLWrapper, JSON
+import encode
 
 print ("Content-type:text/html\n\n")
 
@@ -51,12 +52,12 @@ for result in results["results"]["bindings"]:
     url = result['url']['value']
     name = result['name']['value']
     abstract = result['abstract']['value']
-    origin = result['origin']['value']    
-    
+    origin = result['origin']['value']
+
     table += "<tr>"
     table += f"<td><a href={url}>{name}</a></td>"
     table += f"<td>{abstract}</td>"
-    # table += f"<td>{origin}</td>"            
+    # table += f"<td>{origin}</td>"
     table += "</tr>"
 
 print(table)

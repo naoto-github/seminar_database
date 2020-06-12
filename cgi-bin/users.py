@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sqlite3
+import encode
 
 print ("Content-type:text/html\n\n")
 
@@ -40,12 +41,12 @@ for record in records:
         table += "<td>"
         table += str(column)
         table += "</td>"
-    table += "</tr>"    
+    table += "</tr>"
 table += "</table>"
 print(table)
-    
+
 # データベースを切断
-con.close() 
+con.close()
 
 print("</body>")
 

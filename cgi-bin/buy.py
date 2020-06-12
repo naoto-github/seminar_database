@@ -3,6 +3,7 @@
 import sqlite3
 import cgi
 import datetime
+import encode
 
 # フォームの取得
 form = cgi.FieldStorage()
@@ -39,7 +40,7 @@ stock = int(record[0])
 if stock >= 1:
 
     print("<p>購入に成功しました</p>")
-    
+
     # 在庫数を減らす
     sql = "UPDATE Items SET Stock=" + str(stock-1) + " where id='" + form_item + "';"
     cur.execute(sql)
@@ -49,7 +50,7 @@ if stock >= 1:
     time = dt.strftime('%Y-%m-%d %H:%M:%S')
     sql = "INSERT INTO Histories(time, user_id, item_id) VALUES('" + time + "', '" + form_user + "', '" + form_item  + "');"
     cur.execute(sql)
-    
+
 else:
     print("<p>購入に失敗しました</p>")
 
@@ -59,9 +60,8 @@ print("<p><a href='#' onclick='window.close()'>閉じる</a></p>")
 con.commit()
 
 # データベースを切断
-con.close() 
+con.close()
 
 print("</body>")
 
 print("</html>")
-
